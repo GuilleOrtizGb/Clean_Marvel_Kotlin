@@ -6,7 +6,8 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import io.reactivex.Observable
 
 
-class CharacterServicesImpl(private val api: MarvelResquestGenerator = MarvelResquestGenerator(), private val mapper: CharacterMapperService = CharacterMapperService()) {
+class CharacterServicesImpl(private val api: MarvelResquestGenerator = MarvelResquestGenerator(),
+                            private val mapper: CharacterMapperService = CharacterMapperService()) {
 
 
     fun getCaracters(): Observable<List<Character>> {
