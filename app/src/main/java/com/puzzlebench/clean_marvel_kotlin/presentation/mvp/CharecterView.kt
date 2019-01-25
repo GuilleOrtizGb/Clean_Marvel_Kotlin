@@ -16,7 +16,7 @@ class CharecterView(activity: MainActivity) {
     var adapter = CharacterAdapter { character ->
         //activity.applicationContext.showToast(character.name)
         val fragment=CharacterDetailFragment.newInstance(character.id)
-        fragment.show(activity.fragmentManager,"detail")
+        fragment.show(activity.fragmentManager,"detailDialogTag")
     }
 
     fun init() {

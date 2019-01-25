@@ -5,7 +5,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 open class BaseRxDialogFragment: DialogFragment(){
 
-    private var subscriptions= CompositeDisposable()
+    var subscriptions= CompositeDisposable()
 
     override fun onResume() {
         super.onResume()
