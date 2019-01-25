@@ -1,5 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
+import android.app.FragmentTransaction
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
@@ -13,15 +14,19 @@ import java.lang.ref.WeakReference
 class CharecterView(activity: MainActivity) {
     private val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
-    var adapter = CharacterAdapter { character ->
-        //activity.applicationContext.showToast(character.name)
-        val fragment=CharacterDetailFragment.newInstance(character.id)
-        fragment.show(activity.fragmentManager,"detailDialogTag")
-    }
+
+    var adapter:CharacterAdapter?=null
 
     fun init() {
         val activity = activityRef.get()
         if (activity != null) {
+
+             adapter = CharacterAdapter { character ->
+                //activity.applicationContext.showToast(character.name)
+                val fragment=CharacterDetailFragment.newInstance(character.id)//until here he id is ok
+                fragment.show(activity.fragmentManager,"detailDialogTag")
+            }
+
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
             showLoading()
@@ -47,7 +52,7 @@ class CharecterView(activity: MainActivity) {
     }
 
     fun showCharacters(characters: List<Character>) {
-        adapter.data = characters
+        adapter?.data = characters
     }
 
     fun showLoading() {

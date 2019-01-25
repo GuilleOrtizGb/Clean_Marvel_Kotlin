@@ -14,6 +14,8 @@ class CharactersAdapterViewHolder(view: View, val listener: CharacterListener) :
         tv_item.text = item.name
         val string = item.thumbnail.path + "." + item.thumbnail.extension
         image_thumbnail.getImageByUrl(string)
-        setOnClickListener { listener(item) }
+        setOnClickListener {
+            listener(item) }//TODO
+        // here we get the correct id and description but then fragment.characterId gets lost
     }
 }

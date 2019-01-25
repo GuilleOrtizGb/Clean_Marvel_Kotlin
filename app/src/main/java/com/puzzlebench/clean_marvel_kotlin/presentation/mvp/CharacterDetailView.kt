@@ -4,14 +4,17 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.getImageByUrl
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import kotlinx.android.synthetic.main.fragment_character_dialog_detail.*
+import java.lang.ref.WeakReference
 
 class CharacterDetailView(val fragment: CharacterDetailFragment){
 
-    var characterId: Int = 5
+    var characterId: Int = 88
+
     fun init() {
 
+
         if (fragment != null) {
-            characterId = fragment.characterId
+            characterId = fragment.characterId //1011334
         }
     }
 
