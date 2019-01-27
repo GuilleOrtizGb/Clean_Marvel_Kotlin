@@ -15,8 +15,6 @@ private const val CHARACTER_ID="CHARACTER_ID"
 
 class CharacterDetailFragment: BaseRxDialogFragment(){
 
-
-
     var characterId: Int = 89
     var getCharacterDetailsServiceUseCase=GetCharacterDetailsServiceUseCase(CharacterServicesImpl())
     val presenter= CharacterDetailPresenter(CharacterDetailView(this),
@@ -36,9 +34,6 @@ class CharacterDetailFragment: BaseRxDialogFragment(){
 
         arguments?.let {
             characterId = it.getInt(CHARACTER_ID)
-            //TODO RESETEO
-            //AQUI SE BLANQUEA A 0
-
         }
 
         val fragmentDialog=super.onCreateDialog(savedInstanceState)
