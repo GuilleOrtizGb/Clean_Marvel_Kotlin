@@ -1,10 +1,13 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
+import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterRealm
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.Presenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import io.realm.Realm
+import java.util.*
 
 class CharacterPresenter(view: CharecterView,
                          private val getChatacterServiceUseCase: GetCharacterServiceUseCase,
@@ -14,7 +17,25 @@ class CharacterPresenter(view: CharecterView,
         view.init()
         requestGetCharacters()
         view.getFloatinButton().setOnClickListener{
+
             view.showToast("Refreshing")
+
+            val realm: Realm=Realm.getDefaultInstance()
+
+
+
+
+            var testCharacter: CharacterRealm= realm.createObject(CharacterRealm::class.java,
+                    UUID.randomUUID().toString())
+
+            val testCharacter1 =CharacterRealm("nada","nada")
+            testCharacter1.name="Superman"
+            testCharacter1.description="Very super"
+
+            var SavedCharacterRealm: String? = realm.where(CharacterRealm::class.java).findAll().toString()
+
+            view.showToast(SavedCharacterRealm!!)/**/
+
         }
     }
 
