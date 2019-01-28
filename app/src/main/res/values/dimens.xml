@@ -11,4 +11,5 @@
     <dimen name="small_margin_fragment_dialog">8dp</dimen>
     <dimen name="textView_character_name_dialog_fragment_name">30sp</dimen>
     <dimen name="textView_character_name_dialog_fragment_description">20sp</dimen>
+    <dimen name="medium_margin_main_activity">16dp</dimen>
 </resources>

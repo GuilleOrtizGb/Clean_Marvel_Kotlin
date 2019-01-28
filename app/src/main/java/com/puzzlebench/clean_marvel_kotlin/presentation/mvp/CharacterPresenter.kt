@@ -13,6 +13,9 @@ class CharacterPresenter(view: CharecterView,
     fun init() {
         view.init()
         requestGetCharacters()
+        view.getFloatinButton().setOnClickListener{
+            view.showToast("Refreshing")
+        }
     }
 
     private fun requestGetCharacters() {
