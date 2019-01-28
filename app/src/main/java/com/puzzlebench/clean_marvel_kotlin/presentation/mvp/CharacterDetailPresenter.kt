@@ -27,8 +27,7 @@ class CharacterDetailPresenter(
                         view.showCharacterDetals(character [0])
                     }
                 }, { e ->
-                    //tod errorconflict return
-                    view.showToast(e.message.toString())// TODO conflict return
+                    view.showToast(e.message.toString())
                 })
         subscrptions.add(subscrption)
 

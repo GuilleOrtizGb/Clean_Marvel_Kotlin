@@ -8,13 +8,13 @@ import java.lang.ref.WeakReference
 
 class CharacterDetailView(val fragment: CharacterDetailFragment){
 
-    var characterId: Int = 88
+    var characterId: Int = 0
 
     fun init() {
 
 
         if (fragment != null) {
-            characterId = fragment.characterId //1011334
+            characterId = fragment.characterId
         }
     }
 

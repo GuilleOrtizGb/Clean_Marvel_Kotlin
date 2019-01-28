@@ -34,7 +34,6 @@
                 android:layout_margin="@dimen/small_margin_fragment_dialog"
                 android:background="@color/colorDescriptionBackground"
                 android:padding="@dimen/small_margin_fragment_dialog"
-                android:text="Lorem Ipsum is simply dummy text of the printing and "
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/textView_character_name_dialog_fragment_description" />
 

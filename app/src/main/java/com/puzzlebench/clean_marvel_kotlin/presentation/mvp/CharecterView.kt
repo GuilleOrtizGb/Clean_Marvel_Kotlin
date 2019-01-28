@@ -23,7 +23,7 @@ class CharecterView(activity: MainActivity) {
 
              adapter = CharacterAdapter { character ->
                 //activity.applicationContext.showToast(character.name)
-                val fragment=CharacterDetailFragment.newInstance(character.id)//until here he id is ok
+                val fragment=CharacterDetailFragment.newInstance(character.id)
                 fragment.show(activity.fragmentManager,"detailDialogTag")
             }
 

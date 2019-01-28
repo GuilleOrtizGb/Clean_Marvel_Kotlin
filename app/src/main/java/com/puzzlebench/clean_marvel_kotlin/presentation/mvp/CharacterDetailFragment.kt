@@ -15,7 +15,7 @@ private const val CHARACTER_ID="CHARACTER_ID"
 
 class CharacterDetailFragment: BaseRxDialogFragment(){
 
-    var characterId: Int = 89
+    var characterId: Int = 0
     var getCharacterDetailsServiceUseCase=GetCharacterDetailsServiceUseCase(CharacterServicesImpl())
     val presenter= CharacterDetailPresenter(CharacterDetailView(this),
             getCharacterDetailsServiceUseCase, subscriptions)
