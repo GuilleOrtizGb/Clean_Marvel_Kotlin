@@ -7,6 +7,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
+import io.realm.RealmConfiguration
+import io.realm.RealmQuery
+import io.realm.RealmResults
 import java.util.*
 
 class CharacterPresenter(view: CharecterView,
@@ -20,21 +23,36 @@ class CharacterPresenter(view: CharecterView,
 
             view.showToast("Refreshing")
 
-            val realm: Realm=Realm.getDefaultInstance()
+            val realm: Realm = Realm.getDefaultInstance()
+
+            realm.beginTransaction()
+
+            val testCharacter2 = realm.createObject(CharacterRealm::class.java)
+            testCharacter2.name="Superman"
+            testCharacter2.description="Very super"
+
+            val testCharacter3 = realm.createObject(CharacterRealm::class.java)
+            testCharacter3.name="SpiderMan"
+            testCharacter3.description="Spider"
+
+            realm.commitTransaction()
+
+            val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
+                   .findAll()
+            val savedCharacterRealmQuery = realm.where(CharacterRealm::class.java)
+                    .equalTo("name","SpiderMAn").findAll()
 
 
+            savedCharacterRealmQuery.forEach { character ->
+                realm.beginTransaction()
+                character.deleteFromRealm()
+                realm.commitTransaction()
+            }
 
-
-            var testCharacter: CharacterRealm= realm.createObject(CharacterRealm::class.java,
-                    UUID.randomUUID().toString())
-
-            val testCharacter1 =CharacterRealm("nada","nada")
-            testCharacter1.name="Superman"
-            testCharacter1.description="Very super"
-
-            var SavedCharacterRealm: String? = realm.where(CharacterRealm::class.java).findAll().toString()
-
-            view.showToast(SavedCharacterRealm!!)/**/
+            allSavedCharacterRealm.forEach { character ->
+                view.showToast(character.name.toString())
+                println("character "+character.name)
+            }
 
         }
     }

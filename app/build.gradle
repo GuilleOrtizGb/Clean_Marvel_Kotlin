@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'realm-android'
+
 
 android {
     compileSdkVersion 26
@@ -77,3 +77,5 @@ android.testOptions.unitTests.all {
 repositories {
     mavenCentral()
 }
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-kapt'

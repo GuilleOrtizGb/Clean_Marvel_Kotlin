@@ -8,6 +8,7 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterPresenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharecterView
 import io.realm.Realm
+import io.realm.RealmConfiguration
 
 open class MainActivity : BaseRxActivity() {
 
@@ -17,7 +18,16 @@ open class MainActivity : BaseRxActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter.init()
+
         Realm.init(this);
+
+        val config= RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build()
+
+        Realm.setDefaultConfiguration(config)
+
+        presenter.init()
+
     }
 }
