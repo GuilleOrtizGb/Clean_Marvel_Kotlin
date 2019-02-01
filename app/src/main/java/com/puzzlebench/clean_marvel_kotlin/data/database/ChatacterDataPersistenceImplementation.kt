@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import io.realm.RealmList
-
+import io.realm.RealmResults
 
 
 class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSave=CharacterMapperSave()):CharacterDataPersistance{
@@ -17,33 +17,39 @@ class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSave=Cha
 
         val realm: Realm = Realm.getDefaultInstance()
 
-        realm.beginTransaction()
-
-        val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
-                .findAll()
-
-        allSavedCharacterRealm.forEach { character ->
-            println("DELETED character id ${character.id} name ${character.name} size ${allSavedCharacterRealm.size}")
-            character.deleteFromRealm()
+        realm.executeTransaction{
+            var realmList: List<CharacterRealm> = mapper.transformToRealmList(characterList)
+            realm.insertOrUpdate(realmList)
         }
 
-        insertNewValues(realm, characterList)
-
-        val allSavedCharacterRealm2 = realm.where(CharacterRealm::class.java)
-                .findAll()
-
-        allSavedCharacterRealm2.forEach { character ->
-            println("character id ${character.id} name ${character.name} size ${allSavedCharacterRealm.size}\"")
-        }
-        realm.commitTransaction()
+        logAllCharacters(realm)
     }
 
-    private fun insertNewValues(realm: Realm, characterList: List<Character>) {
+    private fun logAllCharacters(realm: Realm) {
 
+        val allSavedCharacterRealm = queryAllCharacters(realm)
 
-        var realmList: List<CharacterRealm> = mapper.transformCharacterListToCharacterRealmList(characterList)
-        realm.insert(realmList)
+        allSavedCharacterRealm.forEach { character ->
+            println("character id ${character.id} name ${character.name} size ${allSavedCharacterRealm.size}")
+        }
+    }
 
+    fun deleteQueryCharacters(realm: Realm, queryCharacterRealm: RealmResults<CharacterRealm>) {
 
+         realm.executeTransaction{
+
+             queryCharacterRealm.forEach { character ->
+                 println("DELETED character id ${character.id} name ${character.name} size ${queryCharacterRealm.size}")
+                 character.deleteFromRealm()
+             }
+         }
+    }
+
+     fun queryAllCharacters(realm: Realm): RealmResults<CharacterRealm>  {
+
+         val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
+                .findAll()
+
+        return allSavedCharacterRealm
     }
 }

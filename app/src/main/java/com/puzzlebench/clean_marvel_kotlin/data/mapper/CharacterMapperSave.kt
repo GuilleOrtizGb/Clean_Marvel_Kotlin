@@ -31,7 +31,7 @@ class CharacterMapperSave: BaseMapperRepository<Character,CharacterRealm>{
             thumbnail.extension
     )
 
-    fun transformCharacterListToCharacterRealmList(listCharacters: List<Character>)
+    fun transformToRealmList(listCharacters: List<Character>)
             = listCharacters.map {
                 transform(it)
             }
