@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import com.puzzlebench.clean_marvel_kotlin.R
+import com.puzzlebench.clean_marvel_kotlin.Utils.Constant
 import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterDetailsServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxDialogFragment
@@ -15,7 +16,7 @@ private const val CHARACTER_ID="CHARACTER_ID"
 
 class CharacterDetailFragment: BaseRxDialogFragment(){
 
-    var characterId: Int = 0
+    var characterId: Int = Constant.DEFAULT_INT_VALUE
     var getCharacterDetailsServiceUseCase=GetCharacterDetailsServiceUseCase(CharacterServicesImpl())
     val presenter= CharacterDetailPresenter(CharacterDetailView(this),
             getCharacterDetailsServiceUseCase, subscriptions)

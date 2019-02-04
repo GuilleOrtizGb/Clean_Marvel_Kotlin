@@ -1,5 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
+import com.puzzlebench.clean_marvel_kotlin.Utils.Constant
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.getImageByUrl
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
@@ -8,7 +9,7 @@ import java.lang.ref.WeakReference
 
 class CharacterDetailView(val fragment: CharacterDetailFragment){
 
-    var characterId: Int = 0
+    var characterId: Int = Constant.DEFAULT_INT_VALUE
 
     fun init() {
 
