@@ -11,7 +11,7 @@ import io.realm.RealmList
 import io.realm.RealmResults
 
 
-class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSave=CharacterMapperSave()):CharacterDataPersistance{
+open class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSave=CharacterMapperSave()):CharacterDataPersistance{
 
     override fun saveCharacters(characterList: List<Character>)= Completable.fromCallable {
 
@@ -22,12 +22,12 @@ class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSave=Cha
             realm.insertOrUpdate(realmList)
         }
 
-        logAllCharacters(realm)
+        logAllCharacters()
     }
 
-    private fun logAllCharacters(realm: Realm) {
+    private fun logAllCharacters() {
 
-        val allSavedCharacterRealm = queryAllCharacters(realm)
+        val allSavedCharacterRealm = queryAllCharacters()
 
         allSavedCharacterRealm.forEach { character ->
             println("character id ${character.id} name ${character.name} size ${allSavedCharacterRealm.size}")
@@ -45,7 +45,9 @@ class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSave=Cha
          }
     }
 
-     fun queryAllCharacters(realm: Realm): RealmResults<CharacterRealm>  {
+     fun queryAllCharacters(): RealmResults<CharacterRealm>  {
+
+         val realm: Realm = Realm.getDefaultInstance()
 
          val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
                 .findAll()
