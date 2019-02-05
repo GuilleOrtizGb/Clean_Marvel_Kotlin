@@ -8,6 +8,7 @@ import android.database.MatrixCursor
 import android.net.Uri
 import com.puzzlebench.clean_marvel_kotlin.data.database.ChatacterDataPersistenceImplementation
 import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterRealm
+import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
@@ -36,9 +37,8 @@ class CharactersContentProvider: ContentProvider(){
 
     }
 
-
-
     override fun onCreate(): Boolean {
+        Realm.init(context);
 
         val config= RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()

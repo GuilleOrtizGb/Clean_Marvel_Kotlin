@@ -51,6 +51,7 @@ open class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSav
 
         return allSavedCharacterRealm
     }
+
     fun queryCharacterById(id: Int?): RealmResults<CharacterRealm>  {
 
         val realm: Realm = Realm.getDefaultInstance()

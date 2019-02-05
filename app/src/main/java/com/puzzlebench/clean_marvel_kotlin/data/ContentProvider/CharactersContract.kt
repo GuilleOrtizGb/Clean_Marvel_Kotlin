@@ -3,8 +3,13 @@ package com.puzzlebench.clean_marvel_kotlin.data.ContentProvider
 import android.net.Uri
 
 
-open class CharactersContract{
+ class CharactersContract{
     companion object {
+
+        fun buildCharacterUriWithId(id: Int) = CONTENT_URI.buildUpon()
+                .appendPath(id.toString())
+                .build()
+
         val CONTENT_AUTHORITY = "com.puzzlebench.clean_marvel_kotlin"
         val BASE_CONTENT_URI= Uri.parse("content://$CONTENT_AUTHORITY")
         const val CHARACTERS_PATH = "characters"
@@ -17,7 +22,5 @@ open class CharactersContract{
 
     }
 
-    open fun buildCharacterUriWithId(id: Int) = CONTENT_URI.buildUpon()
-            .appendPath(id.toString())
-            .build()
+
 }
