@@ -4,10 +4,7 @@ import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterMapperSave
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterRealm
 import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
-import io.realm.RealmList
 import io.realm.RealmResults
 
 
@@ -50,6 +47,16 @@ open class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSav
          val realm: Realm = Realm.getDefaultInstance()
 
          val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
+                .findAll()
+
+        return allSavedCharacterRealm
+    }
+    fun queryCharacterById(id: Int?): RealmResults<CharacterRealm>  {
+
+        val realm: Realm = Realm.getDefaultInstance()
+
+        val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
+                .equalTo("id", id)
                 .findAll()
 
         return allSavedCharacterRealm

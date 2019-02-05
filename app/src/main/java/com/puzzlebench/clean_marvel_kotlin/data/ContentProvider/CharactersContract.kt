@@ -1,7 +1,7 @@
 package com.puzzlebench.clean_marvel_kotlin.data.ContentProvider
 
 import android.net.Uri
-import android.provider.BaseColumns
+
 
 open class CharactersContract{
     companion object {
@@ -16,4 +16,8 @@ open class CharactersContract{
         const val COLUMN_THUMBNAIL: String = "thumbnail"
 
     }
+
+    open fun buildCharacterUriWithId(id: Int) = CONTENT_URI.buildUpon()
+            .appendPath(id.toString())
+            .build()
 }
