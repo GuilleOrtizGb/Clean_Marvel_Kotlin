@@ -17,8 +17,11 @@ import android.net.Uri
 
         const val TABLE_NAME: String = "characters"
         const val COLUMN_ID: String = "_id"
+        const val COLUMN_NAME: String = "_id"
         const val COLUMN_DESCRIPTION: String = "description"
         const val COLUMN_THUMBNAIL: String = "thumbnail"
+        const val COLUMN_THUMBNAIL_PATH: String = "path"
+        const val COLUMN_THUMBNAIL_EXTENSION: String = "extension"
 
     }
 
