@@ -42,17 +42,17 @@ open class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSav
          }
     }
 
-     fun queryAllCharacters(): RealmResults<CharacterRealm>  {
+     fun queryAllCharacters(): List<Character>  {
 
          val realm: Realm = Realm.getDefaultInstance()
 
          val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
                 .findAll()
 
-        return allSavedCharacterRealm
+        return mapper.transformRealm(allSavedCharacterRealm)
     }
 
-    fun queryCharacterById(id: Int?): RealmResults<CharacterRealm>  {
+    fun queryCharacterById(id: Int?): List<Character>  {
 
         val realm: Realm = Realm.getDefaultInstance()
 
@@ -60,6 +60,6 @@ open class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSav
                 .equalTo("id", id)
                 .findAll()
 
-        return allSavedCharacterRealm
+        return mapper.transformRealm(allSavedCharacterRealm)
     }
 }

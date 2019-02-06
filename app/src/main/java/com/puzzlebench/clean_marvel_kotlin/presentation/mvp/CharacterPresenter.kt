@@ -21,12 +21,12 @@ class CharacterPresenter(view: CharecterView,
 
         view.getFloatinButton().setOnClickListener{
 
-            view.showToast("Refreshing")
+            //view.showToast("Refreshing")
 
             view.showLoading()
             requestGetCharacters()
 
-            view.showToast("Done Refreshing")
+           // view.showToast("Done Refreshing")
         }
     }
 
@@ -59,7 +59,7 @@ class CharacterPresenter(view: CharecterView,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    view.showToast("Data saved")
+                    //view.showToast("Data saved")
                 },{errorInSaving->
                     view.showToast(errorInSaving.message.toString())
                 })

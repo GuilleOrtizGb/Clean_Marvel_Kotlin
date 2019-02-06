@@ -24,7 +24,7 @@ open class MainActivity : BaseRxActivity() {
     val presenter = CharacterPresenter(CharecterView(this), getCharacterServiceUseCase,
             getCharacterSaveUseCase, subscriptions)
 
-    // @RequiresApi(Build.VERSION_CODES.O)
+     //@RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,9 +41,9 @@ open class MainActivity : BaseRxActivity() {
 
 
         // Provider test
-        // var cursor: Cursor = contentResolver.query(CharactersContract.CONTENT_URI,null, null, null)
-        // var cursorB: Cursor = contentResolver.query(CharactersContract.buildCharacterUriWithId(1009187),null, null, null)
-        // applicationContext.showToast(cursor.getColumnName(1))
+         //var cursor: Cursor = contentResolver.query(CharactersContract.CONTENT_URI,null, null, null)
+         //var cursorB: Cursor = contentResolver.query(CharactersContract.buildCharacterUriWithId(1009187),null, null, null)
+         //applicationContext.showToast(cursor.getColumnName(1))
 
     }
 }

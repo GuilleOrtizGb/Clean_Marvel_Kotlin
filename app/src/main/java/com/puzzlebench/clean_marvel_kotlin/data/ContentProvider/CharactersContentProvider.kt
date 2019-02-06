@@ -6,7 +6,9 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.net.Uri
+import com.puzzlebench.clean_marvel_kotlin.Utils.Constant
 import com.puzzlebench.clean_marvel_kotlin.data.database.ChatacterDataPersistenceImplementation
+import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterRealm
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import io.realm.Realm
@@ -62,7 +64,7 @@ class CharactersContentProvider: ContentProvider(){
         when(sUriMatcher.match(uri)){
 
             CODE_CHARACTER -> {
-                var allCharacters: RealmResults<CharacterRealm> = ChatacterDataPersistenceImplementation()
+                var allCharacters: List<Character> = ChatacterDataPersistenceImplementation()
                         .queryAllCharacters()
 
                 cursor = createCursor(allCharacters)
@@ -72,7 +74,7 @@ class CharactersContentProvider: ContentProvider(){
             CODE_CHARACTER_WITH_ID -> {
                 var id: String? = uri?.lastPathSegment
 
-                var characterById: RealmResults<CharacterRealm> = ChatacterDataPersistenceImplementation()
+                var characterById: List<Character> = ChatacterDataPersistenceImplementation()
                         .queryCharacterById(id?.toInt())
 
                 cursor = createCursor(characterById)
@@ -85,9 +87,13 @@ class CharactersContentProvider: ContentProvider(){
         return cursor
     }
 
-    private fun createCursor(allCharacters: RealmResults<CharacterRealm>): MatrixCursor {
+    private fun createCursor(allCharacters: List<Character>): MatrixCursor {
 
-        var columnNames: Array<String> = arrayOf("id", "name", "description", "thumbnail")
+        var columnNames: Array<String> = arrayOf(CharactersContract.COLUMN_ID,
+                CharactersContract.COLUMN_NAME,
+                CharactersContract.COLUMN_DESCRIPTION,
+                CharactersContract.COLUMN_THUMBNAIL_PATH,
+                CharactersContract.COLUMN_THUMBNAIL_EXTENSION)
 
         var cursor = MatrixCursor(columnNames)
 
@@ -97,7 +103,8 @@ class CharactersContentProvider: ContentProvider(){
                     character.id,
                     character.name,
                     character.description,
-                    character.thumbnail)
+                    character.thumbnail.path,
+                    character.thumbnail.extension)
 
             cursor.addRow(cursorRow)
 

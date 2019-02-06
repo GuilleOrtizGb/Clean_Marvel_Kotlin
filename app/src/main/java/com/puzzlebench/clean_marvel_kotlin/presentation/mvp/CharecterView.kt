@@ -5,6 +5,8 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
+import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.CharacterLoader
+import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.UpdateCharacters
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.adapter.CharacterAdapter
@@ -12,7 +14,9 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
-class CharecterView(val activity: MainActivity) {
+class CharecterView(val activity: MainActivity) : UpdateCharacters {
+
+
     private val SPAN_COUNT = 1
 
     var adapter:CharacterAdapter?=null
@@ -27,6 +31,7 @@ class CharecterView(val activity: MainActivity) {
 
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
+            activity.loaderManager.initLoader(101,null, CharacterLoader(activity,this))
             showLoading()
         }
 
@@ -36,6 +41,13 @@ class CharecterView(val activity: MainActivity) {
         return  activity.floatingActionButton
 
     }
+
+    override fun updateCharacters(characters: List<Character>) {
+        hideLoading()
+        characters[0].name="guillote"
+        showCharacters(characters)
+    }
+
     fun showToast(message: String) {
         if (activity != null) {
             activity.applicationContext.showToast(message)

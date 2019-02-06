@@ -6,37 +6,45 @@ import android.content.Loader
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Thumbnail
+import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharecterView
 
-class  CharacterLoader(val context: MainActivity): LoaderManager.LoaderCallbacks<Cursor>{
+class  CharacterLoader(val context: MainActivity, val view: CharecterView): LoaderManager.LoaderCallbacks<Cursor>{
+
+    val showUpdatedCharacters: UpdateCharacters = view
+
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
 
         var uri: String = CharactersContract.CONTENT_URI.toString()
-        var characterLoader= CursorLoader(context, Uri.parse(uri),null,null,
+        Toast.makeText(context, "OnLoaderCreated", Toast.LENGTH_LONG).show()
+         return CursorLoader(context, Uri.parse(uri),null,null,
                 null,null)
-
-        return characterLoader
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
-        data.toList(data)
 
+        var characters: List<Character> = data.toList(data)
+        showUpdatedCharacters.updateCharacters(characters)
+
+        Toast.makeText(context, "LoaderFinised", Toast.LENGTH_LONG).show()
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(context, "LoaderReset", Toast.LENGTH_LONG).show()
     }
 
 }
 
-private fun  Cursor?.toList(cursor: Cursor): MutableList<Character> {
+private fun  Cursor.toList(cursor: Cursor): MutableList<Character> {
 
     var characters: MutableList<Character> = mutableListOf()
 
 
-     cursor?.let{
+     let{
         it.moveToFirst()
         while (!it.isAfterLast()) {
             characters.add(
@@ -44,7 +52,7 @@ private fun  Cursor?.toList(cursor: Cursor): MutableList<Character> {
                             it.getInt(it.getColumnIndex(CharactersContract.COLUMN_ID)),
                             it.getString(it.getColumnIndex(CharactersContract.COLUMN_NAME)),
                             it.getString(it.getColumnIndex(CharactersContract.COLUMN_DESCRIPTION)),
-                            Thumbnail(
+                            Thumbnail(//TODO thumbnails are empty
                                     it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_PATH)),
                                     it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_EXTENSION))
                             )
@@ -53,23 +61,7 @@ private fun  Cursor?.toList(cursor: Cursor): MutableList<Character> {
             it.moveToNext()
         }
     }
-
-    /*
-    * characters.add(
-                        Character(
-                                it.getInt(it.getColumnIndex(CharactersContract.COLUMN_ID)),
-                                it.getString(it.getColumnIndex(CharactersContract.COLUMN_NAME)),
-                                it.getString(it.getColumnIndex(CharactersContract.COLUMN_DESCRIPTION)),
-                                Thumbnail(
-                                        it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_PATH)),
-                                        it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_EXTENSION))
-                                )
-                        )
-                )*/
-
-
     return  characters
-
 }
 
 

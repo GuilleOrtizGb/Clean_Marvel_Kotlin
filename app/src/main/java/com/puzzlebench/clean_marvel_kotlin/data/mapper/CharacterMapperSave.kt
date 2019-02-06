@@ -15,6 +15,7 @@ class CharacterMapperSave: BaseMapperRepository<Character,CharacterRealm>{
     )
 
     private fun trasnformToThumbnail(thumbnail: ThumbnailRealm?)= Thumbnail (
+        // TODO bug here thumbnail ok
 
     )
 
@@ -30,6 +31,11 @@ class CharacterMapperSave: BaseMapperRepository<Character,CharacterRealm>{
             thumbnail.path,
             thumbnail.extension
     )
+
+    fun transformRealm(characters: List<CharacterRealm>)
+            = characters.map {
+                transformToResponse(it)
+            }
 
     fun transformToRealmList(listCharacters: List<Character>)
             = listCharacters.map {

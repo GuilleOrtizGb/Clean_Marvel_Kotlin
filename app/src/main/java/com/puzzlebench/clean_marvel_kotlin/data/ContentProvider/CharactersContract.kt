@@ -16,8 +16,8 @@ import android.net.Uri
         val CONTENT_URI= Uri.withAppendedPath(BASE_CONTENT_URI, CHARACTERS_PATH)
 
         const val TABLE_NAME: String = "characters"
-        const val COLUMN_ID: String = "_id"
-        const val COLUMN_NAME: String = "_id"
+        const val COLUMN_ID: String = "id"
+        const val COLUMN_NAME: String = "name"
         const val COLUMN_DESCRIPTION: String = "description"
         const val COLUMN_THUMBNAIL: String = "thumbnail"
         const val COLUMN_THUMBNAIL_PATH: String = "path"
