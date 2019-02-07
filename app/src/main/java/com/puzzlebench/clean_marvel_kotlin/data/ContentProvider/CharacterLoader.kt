@@ -26,7 +26,6 @@ class  CharacterLoader(val context: MainActivity, val view: CharecterView): Load
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
-
         var characters: List<Character> = data.toList(data)
         showUpdatedCharacters.updateCharacters(characters)
 
@@ -52,7 +51,7 @@ private fun  Cursor.toList(cursor: Cursor): MutableList<Character> {
                             it.getInt(it.getColumnIndex(CharactersContract.COLUMN_ID)),
                             it.getString(it.getColumnIndex(CharactersContract.COLUMN_NAME)),
                             it.getString(it.getColumnIndex(CharactersContract.COLUMN_DESCRIPTION)),
-                            Thumbnail(//TODO thumbnails are empty
+                            Thumbnail(
                                     it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_PATH)),
                                     it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_EXTENSION))
                             )

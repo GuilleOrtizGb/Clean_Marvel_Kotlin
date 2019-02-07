@@ -44,7 +44,6 @@ class CharecterView(val activity: MainActivity) : UpdateCharacters {
 
     override fun updateCharacters(characters: List<Character>) {
         hideLoading()
-        characters[0].name="guillote"
         showCharacters(characters)
     }
 

@@ -10,13 +10,13 @@ class CharacterMapperSave: BaseMapperRepository<Character,CharacterRealm>{
             type.id,
             type.name,
             type.description,
-            trasnformToThumbnail(type.thumbnail)
+            trasnformToThumbnail(type.thumbnail!!)
 
     )
 
-    private fun trasnformToThumbnail(thumbnail: ThumbnailRealm?)= Thumbnail (
-        // TODO bug here thumbnail ok
-
+    private fun trasnformToThumbnail(thumbnail: ThumbnailRealm)= Thumbnail (
+            thumbnail.path,
+            thumbnail.extension
     )
 
     override fun transform(type: Character)= CharacterRealm (

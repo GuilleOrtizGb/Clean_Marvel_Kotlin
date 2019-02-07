@@ -66,7 +66,6 @@ class CharactersContentProvider: ContentProvider(){
             CODE_CHARACTER -> {
                 var allCharacters: List<Character> = ChatacterDataPersistenceImplementation()
                         .queryAllCharacters()
-
                 cursor = createCursor(allCharacters)
 
             }
@@ -105,7 +104,6 @@ class CharactersContentProvider: ContentProvider(){
                     character.description,
                     character.thumbnail.path,
                     character.thumbnail.extension)
-
             cursor.addRow(cursorRow)
 
         }

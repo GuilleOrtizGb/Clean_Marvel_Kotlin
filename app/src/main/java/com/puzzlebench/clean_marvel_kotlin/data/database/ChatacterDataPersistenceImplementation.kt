@@ -16,6 +16,8 @@ open class ChatacterDataPersistenceImplementation(val mapper: CharacterMapperSav
 
         realm.executeTransaction{
             var realmList: List<CharacterRealm> = mapper.transformToRealmList(characterList)
+            // Test
+            realmList[0].name = "Data from Realm"
             realm.insertOrUpdate(realmList)
         }
 
