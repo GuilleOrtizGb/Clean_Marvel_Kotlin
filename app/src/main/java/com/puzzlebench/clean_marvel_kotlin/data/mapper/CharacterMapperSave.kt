@@ -11,7 +11,6 @@ class CharacterMapperSave: BaseMapperRepository<Character,CharacterRealm>{
             type.name,
             type.description,
             trasnformToThumbnail(type.thumbnail!!)
-
     )
 
     private fun trasnformToThumbnail(thumbnail: ThumbnailRealm)= Thumbnail (
@@ -20,7 +19,6 @@ class CharacterMapperSave: BaseMapperRepository<Character,CharacterRealm>{
     )
 
     override fun transform(type: Character)= CharacterRealm (
-
             type.id,
             type.name,
             type.description,

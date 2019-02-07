@@ -38,6 +38,4 @@
                 android:textSize="@dimen/textView_character_name_dialog_fragment_description" />
 
         </LinearLayout>
-
     </RelativeLayout>
-

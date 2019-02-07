@@ -20,8 +20,7 @@ class  CharacterLoader(val context: MainActivity, val view: CharecterView): Load
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
 
         var uri: String = CharactersContract.CONTENT_URI.toString()
-        Toast.makeText(context, "OnLoaderCreated", Toast.LENGTH_LONG).show()
-         return CursorLoader(context, Uri.parse(uri),null,null,
+        return CursorLoader(context, Uri.parse(uri),null,null,
                 null,null)
     }
 
@@ -33,7 +32,6 @@ class  CharacterLoader(val context: MainActivity, val view: CharecterView): Load
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>?) {
-        Toast.makeText(context, "LoaderReset", Toast.LENGTH_LONG).show()
     }
 
 }

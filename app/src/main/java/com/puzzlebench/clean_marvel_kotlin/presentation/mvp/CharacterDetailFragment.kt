@@ -12,7 +12,7 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterDetailsServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxDialogFragment
 
-private const val CHARACTER_ID="CHARACTER_ID"
+
 
 class CharacterDetailFragment: BaseRxDialogFragment(){
 
@@ -34,7 +34,7 @@ class CharacterDetailFragment: BaseRxDialogFragment(){
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         arguments?.let {
-            characterId = it.getInt(CHARACTER_ID)
+            characterId = it.getInt(Constant.CHARACTER_ID)
         }
 
         val fragmentDialog=super.onCreateDialog(savedInstanceState)
@@ -46,7 +46,7 @@ class CharacterDetailFragment: BaseRxDialogFragment(){
         fun newInstance(characterId: Int)=
                 CharacterDetailFragment().apply {
                     arguments=Bundle().apply {
-                        putInt(CHARACTER_ID, characterId)
+                        putInt(Constant.CHARACTER_ID, characterId)
                     }
                 }
     }

@@ -13,7 +13,6 @@ class CharacterDetailPresenter(
 
     fun init(){
         view.init()
-        //requestGetCharacterDetail()
     }
 
     fun requestGetCharacterDetail(){
@@ -30,7 +29,5 @@ class CharacterDetailPresenter(
                     view.showToast(e.message.toString())
                 })
         subscrptions.add(subscrption)
-
     }
-
 }

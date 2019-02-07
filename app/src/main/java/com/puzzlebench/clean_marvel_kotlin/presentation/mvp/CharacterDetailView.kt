@@ -13,12 +13,10 @@ class CharacterDetailView(val fragment: CharacterDetailFragment){
 
     fun init() {
 
-
         if (fragment != null) {
             characterId = fragment.characterId
         }
     }
-
 
     fun showCharacterDetals(character: Character){
         fragment.textView_fragment_dialog_character_name.text=character.name

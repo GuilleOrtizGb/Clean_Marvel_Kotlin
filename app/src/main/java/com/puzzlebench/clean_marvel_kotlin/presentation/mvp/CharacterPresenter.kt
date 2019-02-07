@@ -21,12 +21,8 @@ class CharacterPresenter(view: CharecterView,
 
         view.getFloatinButton().setOnClickListener{
 
-            //view.showToast("Refreshing")
-
             view.showLoading()
             requestGetCharacters()
-
-           // view.showToast("Done Refreshing")
         }
     }
 
@@ -65,6 +61,5 @@ class CharacterPresenter(view: CharecterView,
                 })
 
         subscriptions.add(subscription)
-
     }
 }

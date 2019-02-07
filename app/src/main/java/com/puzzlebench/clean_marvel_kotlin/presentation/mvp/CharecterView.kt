@@ -17,6 +17,7 @@ import java.lang.ref.WeakReference
 class CharecterView(val activity: MainActivity) : UpdateCharacters {
 
 
+    private val CHARACTER_LOADER_ID=101
     private val SPAN_COUNT = 1
 
     var adapter:CharacterAdapter?=null
@@ -31,7 +32,7 @@ class CharecterView(val activity: MainActivity) : UpdateCharacters {
 
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
-            activity.loaderManager.initLoader(101,null, CharacterLoader(activity,this))
+            activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(activity,this))
             showLoading()
         }
 

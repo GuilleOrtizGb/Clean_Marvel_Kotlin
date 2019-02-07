@@ -6,15 +6,10 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.net.Uri
-import com.puzzlebench.clean_marvel_kotlin.Utils.Constant
-import com.puzzlebench.clean_marvel_kotlin.data.database.ChatacterDataPersistenceImplementation
+import com.puzzlebench.clean_marvel_kotlin.data.database.ChatacterDataRepoImplementation
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
-import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterRealm
-import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import io.realm.RealmResults
-
 
 
 class CharactersContentProvider: ContentProvider(){
@@ -64,7 +59,7 @@ class CharactersContentProvider: ContentProvider(){
         when(sUriMatcher.match(uri)){
 
             CODE_CHARACTER -> {
-                var allCharacters: List<Character> = ChatacterDataPersistenceImplementation()
+                var allCharacters: List<Character> = ChatacterDataRepoImplementation()
                         .queryAllCharacters()
                 cursor = createCursor(allCharacters)
 
@@ -73,7 +68,7 @@ class CharactersContentProvider: ContentProvider(){
             CODE_CHARACTER_WITH_ID -> {
                 var id: String? = uri?.lastPathSegment
 
-                var characterById: List<Character> = ChatacterDataPersistenceImplementation()
+                var characterById: List<Character> = ChatacterDataRepoImplementation()
                         .queryCharacterById(id?.toInt())
 
                 cursor = createCursor(characterById)
