@@ -1,5 +1,7 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
+import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.CharacterLoader
+import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.UpdateCharacters
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterRealm
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
@@ -13,10 +15,13 @@ import io.realm.Realm
 class CharacterPresenter(view: CharecterView,
                          private val getChatacterServiceUseCase: GetCharacterServiceUseCase,
                          private val getChatacterSaveUseCase: GetCharactersSaveUseCase,
-                         val subscriptions: CompositeDisposable) : Presenter<CharecterView>(view) {
+                         val subscriptions: CompositeDisposable) : Presenter<CharecterView>(view), UpdateCharacters {
+
+    private val CHARACTER_LOADER_ID=101
 
     fun init() {
         view.init()
+        view.activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(view.activity,this))
         requestGetCharacters()
 
         view.getFloatinButton().setOnClickListener{
@@ -24,6 +29,11 @@ class CharacterPresenter(view: CharecterView,
             view.showLoading()
             requestGetCharacters()
         }
+    }
+
+    override fun updateCharacters(characters: List<Character>) {
+        view.hideLoading()
+        view.showCharacters(characters)
     }
 
     private fun requestGetCharacters() {

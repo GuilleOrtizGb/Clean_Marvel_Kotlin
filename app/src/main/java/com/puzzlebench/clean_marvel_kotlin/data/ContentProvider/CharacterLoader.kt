@@ -11,11 +11,12 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Thumbnail
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterPresenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharecterView
 
-class  CharacterLoader(val context: MainActivity, val view: CharecterView): LoaderManager.LoaderCallbacks<Cursor>{
+class  CharacterLoader(val context: MainActivity, val presenter: CharacterPresenter): LoaderManager.LoaderCallbacks<Cursor>{
 
-    val showUpdatedCharacters: UpdateCharacters = view
+    val showUpdatedCharacters: UpdateCharacters = presenter
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
 
@@ -39,7 +40,6 @@ class  CharacterLoader(val context: MainActivity, val view: CharecterView): Load
 private fun  Cursor.toList(cursor: Cursor): MutableList<Character> {
 
     var characters: MutableList<Character> = mutableListOf()
-
 
      let{
         it.moveToFirst()
