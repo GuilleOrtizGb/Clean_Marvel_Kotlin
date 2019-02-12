@@ -23,9 +23,7 @@ class CharacterPresenter(view: CharecterView,
         view.init()
         view.activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(view.activity,this))
         requestGetCharacters()
-
         view.getFloatinButton().setOnClickListener{
-
             view.showLoading()
             requestGetCharacters()
         }
@@ -46,11 +44,9 @@ class CharacterPresenter(view: CharecterView,
                         view.showToastNoItemToShow()
                     } else {
                         view.showCharacters(characters)
-
                         saveCharacters(characters)
                     }
                     view.hideLoading()
-
                 }, { e ->
                     view.hideLoading()
                     view.showToastNetworkError(e.message.toString())
@@ -69,7 +65,6 @@ class CharacterPresenter(view: CharecterView,
                 },{errorInSaving->
                     view.showToast(errorInSaving.message.toString())
                 })
-
         subscriptions.add(subscription)
     }
 }

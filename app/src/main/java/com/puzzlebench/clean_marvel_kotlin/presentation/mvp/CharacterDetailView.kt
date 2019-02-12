@@ -12,7 +12,6 @@ class CharacterDetailView(val fragment: CharacterDetailFragment){
     var characterId: Int = Constant.DEFAULT_INT_VALUE
 
     fun init() {
-
         if (fragment != null) {
             characterId = fragment.characterId
         }
@@ -23,11 +22,9 @@ class CharacterDetailView(val fragment: CharacterDetailFragment){
         fragment.textView_character_fragment_dialog_description.text=character.description
         var img= character.thumbnail.path+"."+character.thumbnail.extension
         fragment.imageView_fragment_dialog.getImageByUrl(img)
-
     }
 
     fun showToast(text: String) {
         fragment.activity.showToast(text)
     }
-
 }

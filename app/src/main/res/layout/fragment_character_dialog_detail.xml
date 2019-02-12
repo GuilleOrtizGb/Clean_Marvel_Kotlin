@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,6 +35,5 @@
                 android:padding="@dimen/small_margin_fragment_dialog"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/textView_character_name_dialog_fragment_description" />
-
         </LinearLayout>
     </RelativeLayout>

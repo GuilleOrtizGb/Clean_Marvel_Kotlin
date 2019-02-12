@@ -21,7 +21,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton"
-        android:layout_width="72dp"
+        android:layout_width="@dimen/width_fab_main_activity"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/medium_margin_main_activity"

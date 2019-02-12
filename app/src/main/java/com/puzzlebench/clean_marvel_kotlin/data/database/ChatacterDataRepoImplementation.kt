@@ -13,19 +13,14 @@ open class ChatacterDataRepoImplementation(val mapper: CharacterMapperSave=Chara
 
     override fun saveCharacters(characterList: List<Character>)= Completable.fromCallable {
 
-
         Realm.getDefaultInstance().use {
             realm->
                 realm.executeTransaction{
+
                     var realmList: List<CharacterRealm> = mapper.transformToRealmList(characterList)
-
-                    // Test
-                    realmList[0].name = "Data from Realm"
-
-                    realm.insertOrUpdate(realmList)
+                    if (realmList.isNullOrEmpty()) Log.v("Error","List is null or empty") else realm.insertOrUpdate(realmList)
                 }
             }
-
         logAllCharacters()
     }
 
@@ -43,7 +38,6 @@ open class ChatacterDataRepoImplementation(val mapper: CharacterMapperSave=Chara
         Realm.getDefaultInstance().use {
             realm->
                 realm.executeTransaction{
-
                     queryCharacterRealm.forEach { character ->
                         Log.v("Deleted CHaracters","DELETED character id ${character.id} name ${character.name} size ${queryCharacterRealm.size}")
                         character.deleteFromRealm()
@@ -53,16 +47,14 @@ open class ChatacterDataRepoImplementation(val mapper: CharacterMapperSave=Chara
     }
 
      fun queryAllCharacters(): List<Character>  {
-
          val realm: Realm = Realm.getDefaultInstance()
-
          val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
-                .findAll()
-        return mapper.transformRealm(allSavedCharacterRealm)
-    }
+                 .findAll()
+         return mapper.transformRealm(allSavedCharacterRealm)
+     }
+
 
     fun queryCharacterById(id: Int?): List<Character>  {
-
         val realm: Realm = Realm.getDefaultInstance()
 
         val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)

@@ -2,7 +2,6 @@ package com.puzzlebench.clean_marvel_kotlin.data.ContentProvider
 
 import android.net.Uri
 
-
  class CharactersContract{
     companion object {
 
@@ -22,8 +21,5 @@ import android.net.Uri
         const val COLUMN_THUMBNAIL: String = "thumbnail"
         const val COLUMN_THUMBNAIL_PATH: String = "path"
         const val COLUMN_THUMBNAIL_EXTENSION: String = "extension"
-
     }
-
-
 }

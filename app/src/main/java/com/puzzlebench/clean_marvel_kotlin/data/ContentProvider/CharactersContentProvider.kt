@@ -11,14 +11,13 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
-
 class CharactersContentProvider: ContentProvider(){
 
     val CODE_CHARACTER = 100
     val CODE_CHARACTER_WITH_ID = 101
+    val PAD =  "/#"
 
     private val sUriMatcher: UriMatcher = buildUriMatcher()
-
 
     private fun buildUriMatcher(): UriMatcher {
         val matcher: UriMatcher =  UriMatcher(UriMatcher.NO_MATCH)
@@ -28,10 +27,9 @@ class CharactersContentProvider: ContentProvider(){
         matcher.addURI(authority,CharactersContract.TABLE_NAME,CODE_CHARACTER)
 
         // URI is content://com.puzzlebench.clean_marvel_kotlin/characters/123456/
-        matcher.addURI(authority,CharactersContract.TABLE_NAME + "/#", CODE_CHARACTER_WITH_ID)
+        matcher.addURI(authority,CharactersContract.TABLE_NAME + PAD , CODE_CHARACTER_WITH_ID)
 
         return matcher
-
     }
 
     override fun onCreate(): Boolean {
@@ -47,7 +45,7 @@ class CharactersContentProvider: ContentProvider(){
     }
 
     override fun insert(uri: Uri?, values: ContentValues?): Uri {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // Do nothing
     }
 
     override fun query(uri: Uri?, projection: Array<out String>?,
@@ -62,7 +60,6 @@ class CharactersContentProvider: ContentProvider(){
                 var allCharacters: List<Character> = ChatacterDataRepoImplementation()
                         .queryAllCharacters()
                 cursor = createCursor(allCharacters)
-
             }
 
             CODE_CHARACTER_WITH_ID -> {
@@ -72,7 +69,6 @@ class CharactersContentProvider: ContentProvider(){
                         .queryCharacterById(id?.toInt())
 
                 cursor = createCursor(characterById)
-
             }
             else -> {
                 throw  UnsupportedOperationException(" uri Not found : " + uri);
@@ -92,7 +88,6 @@ class CharactersContentProvider: ContentProvider(){
         var cursor = MatrixCursor(columnNames)
 
         allCharacters.forEach { character ->
-
             var cursorRow = arrayOf(
                     character.id,
                     character.name,
@@ -100,21 +95,19 @@ class CharactersContentProvider: ContentProvider(){
                     character.thumbnail.path,
                     character.thumbnail.extension)
             cursor.addRow(cursorRow)
-
         }
         return cursor
     }
 
     override fun update(uri: Uri?, values: ContentValues?, selection: String?, selectionArgs: Array<out String>?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // Do nothing
     }
 
     override fun delete(uri: Uri?, selection: String?, selectionArgs: Array<out String>?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // Do nothing
     }
 
     override fun getType(uri: Uri?): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // Do nothing
     }
-
 }

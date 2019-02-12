@@ -22,12 +22,10 @@ class CharecterView(val activity: MainActivity) {
 
     fun init() {
         if (activity != null) {
-
              adapter = CharacterAdapter { character ->
                 val fragment=CharacterDetailFragment.newInstance(character.id)
                 fragment.show(activity.fragmentManager,"detailDialogTag")
             }
-
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
             showLoading()
@@ -37,13 +35,11 @@ class CharecterView(val activity: MainActivity) {
 
     fun getFloatinButton(): FloatingActionButton {
         return  activity.floatingActionButton
-
     }
 
     fun showToast(message: String) {
         if (activity != null) {
             activity.applicationContext.showToast(message)
-
         }
     }
 

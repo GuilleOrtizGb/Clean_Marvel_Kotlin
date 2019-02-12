@@ -12,8 +12,6 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterDetailsServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxDialogFragment
 
-
-
 class CharacterDetailFragment: BaseRxDialogFragment(){
 
     var characterId: Int = Constant.DEFAULT_INT_VALUE

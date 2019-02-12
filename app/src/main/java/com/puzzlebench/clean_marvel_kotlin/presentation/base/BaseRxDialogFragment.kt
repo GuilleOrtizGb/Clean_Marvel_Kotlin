@@ -10,7 +10,6 @@ open class BaseRxDialogFragment: DialogFragment(){
     override fun onResume() {
         super.onResume()
         subscriptions= CompositeDisposable()
-
     }
 
     override fun onPause() {

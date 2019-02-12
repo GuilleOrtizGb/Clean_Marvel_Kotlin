@@ -32,6 +32,5 @@ open class MainActivity : BaseRxActivity() {
         Realm.setDefaultConfiguration(config)
 
         presenter.init()
-
     }
 }

@@ -20,7 +20,7 @@ class  CharacterLoader(val context: MainActivity, val presenter: CharacterPresen
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
 
-        var uri: String = CharactersContract.CONTENT_URI.toString()
+        val uri: String = CharactersContract.CONTENT_URI.toString()
         return CursorLoader(context, Uri.parse(uri),null,null,
                 null,null)
     }
@@ -28,13 +28,10 @@ class  CharacterLoader(val context: MainActivity, val presenter: CharacterPresen
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
         var characters: List<Character> = data.toList(data)
         showUpdatedCharacters.updateCharacters(characters)
-
-        Toast.makeText(context, "LoaderFinised", Toast.LENGTH_LONG).show()
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>?) {
     }
-
 }
 
 private fun  Cursor.toList(cursor: Cursor): MutableList<Character> {
@@ -60,5 +57,3 @@ private fun  Cursor.toList(cursor: Cursor): MutableList<Character> {
     }
     return  characters
 }
-
-

@@ -6,7 +6,6 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.response.MarvelBaseRespo
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
-import java.util.*
 
 interface MarvelApi {
     @GET("/v1/public/characters")
