@@ -6,13 +6,10 @@ import android.content.Loader
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Thumbnail
-import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterPresenter
-import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharecterView
 
 class  CharacterLoader(val context: MainActivity, val presenter: CharacterPresenter): LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -36,24 +33,14 @@ class  CharacterLoader(val context: MainActivity, val presenter: CharacterPresen
 
 private fun  Cursor.toList(cursor: Cursor): MutableList<Character> {
 
-    var characters: MutableList<Character> = mutableListOf()
-
-     let{
-        it.moveToFirst()
-        while (!it.isAfterLast()) {
-            characters.add(
-                    Character(
-                            it.getInt(it.getColumnIndex(CharactersContract.COLUMN_ID)),
-                            it.getString(it.getColumnIndex(CharactersContract.COLUMN_NAME)),
-                            it.getString(it.getColumnIndex(CharactersContract.COLUMN_DESCRIPTION)),
-                            Thumbnail(
-                                    it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_PATH)),
-                                    it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_EXTENSION))
-                            )
-                    )
-            )
-            it.moveToNext()
-        }
-    }
-    return  characters
+    return generateSequence { if (cursor.moveToNext()) cursor else null }
+                 .map { Character(
+                         it.getInt(it.getColumnIndex(CharactersContract.COLUMN_ID)),
+                         it.getString(it.getColumnIndex(CharactersContract.COLUMN_NAME)),
+                         it.getString(it.getColumnIndex(CharactersContract.COLUMN_DESCRIPTION)),
+                         Thumbnail(
+                                 it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_PATH)),
+                                 it.getString(it.getColumnIndex(CharactersContract.COLUMN_THUMBNAIL_EXTENSION))
+                         )
+                 ) }.toMutableList()
 }
