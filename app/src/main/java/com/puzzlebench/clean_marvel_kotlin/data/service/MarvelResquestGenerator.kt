@@ -11,6 +11,9 @@ import java.util.Date
 
 
 class MarvelResquestGenerator {
+    companion object {
+        val MD5 = "MD5"
+    }
     private val PRIVATE_API_KEY_ARG = "hash"
     private val PUBLIC_API_KEY_ARG = "apikey"
     private val ORDER_BY = "orderBy"
@@ -20,7 +23,7 @@ class MarvelResquestGenerator {
         val defaultRequest = chain.request()
         val timestamp = Date().time
 
-        val hash = md5(timestamp.toString() + BuildConfig.PRIVATE_API_KEY_VALUE +
+        val hash = createMD5Hash(timestamp.toString() + BuildConfig.PRIVATE_API_KEY_VALUE +
                 BuildConfig.PUBLIC_API_KEY_VALUE)
 
         val defaulthttpUrl = defaultRequest.url()
@@ -45,9 +48,7 @@ class MarvelResquestGenerator {
         return retrofit.create(serviceClass)
     }
 
-    private fun md5(stringToHash: String): String {
-        val MD5 = "MD5"
-
+    private fun createMD5Hash(stringToHash: String): String {
         try {
             val digest = MessageDigest.getInstance(MD5)
             digest.update(stringToHash.toByteArray())

@@ -36,7 +36,7 @@ class CharacterPresenter(view: CharecterView,
 
     private fun requestGetCharacters() {
         val subscription =
-                getChatacterServiceUseCase.invoke()
+                getChatacterServiceUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ characters ->
