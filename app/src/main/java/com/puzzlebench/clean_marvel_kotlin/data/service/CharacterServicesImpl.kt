@@ -4,14 +4,17 @@ import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterMapperService
 import com.puzzlebench.clean_marvel_kotlin.data.service.api.MarvelApi
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import io.reactivex.Observable
+import io.reactivex.Single
 
 class CharacterServicesImpl(private val api: MarvelResquestGenerator = MarvelResquestGenerator(),
                             private val mapper: CharacterMapperService = CharacterMapperService()) {
 
     fun getCaracters(): Observable<List<Character>> {
+
         return Observable.create { subscriber ->
             val callResponse = api.createService(MarvelApi::class.java).getCharacter()
             val response = callResponse.execute()
+
 
             if (response.isSuccessful) {
                 subscriber.onNext(mapper.transform(response.body()!!.data!!.characters))
@@ -22,23 +25,13 @@ class CharacterServicesImpl(private val api: MarvelResquestGenerator = MarvelRes
         }
     }
 
-    fun getCharactersDetails(characterId: Int): Observable<List<Character>> {
-        return Observable.create { subscriber ->
-            val callResponse = api.createService(MarvelApi::class.java).getCharacterDetails(characterId)
-            val response = callResponse.execute()
-
-            if (response.isSuccessful) {
-
-                val responseChars = response.body()?.data?.characters
-
-                responseChars?.let{
-                    subscriber.onNext(mapper.transform(it))
-                    subscriber.onComplete()
-                }
-
-            } else {
-                subscriber.onError(Throwable(response.message()))
-            }
+    fun getCharactersDetails(characterId: Int): Single<List<Character>> = Single.fromCallable {
+        val callResponse = api.createService(MarvelApi::class.java).getCharacterDetails(characterId)
+        val response = callResponse.execute()
+        if (response.isSuccessful){
+            mapper.transform(response.body()?.data?.characters?: emptyList())
+        }else{
+            emptyList()
         }
     }
 }

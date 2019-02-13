@@ -58,7 +58,7 @@ class CharactersContentProvider: ContentProvider(){
 
             CODE_CHARACTER -> {
                 var allCharacters: List<Character> = ChatacterDataRepoImplementation()
-                        .queryAllCharacters()
+                        .queryAllCharacters().blockingGet()
                 cursor = createCursor(allCharacters)
             }
 

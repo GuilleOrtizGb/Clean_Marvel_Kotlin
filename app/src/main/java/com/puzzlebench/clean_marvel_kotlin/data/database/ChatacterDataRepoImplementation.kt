@@ -6,17 +6,17 @@ import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterMapperSave
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterRealm
 import io.reactivex.Completable
+import io.reactivex.Single
 import io.realm.Realm
+import io.realm.RealmQuery
 import io.realm.RealmResults
 
 open class ChatacterDataRepoImplementation(val mapper: CharacterMapperSave=CharacterMapperSave()):CharacterDataRepo{
 
     override fun saveCharacters(characterList: List<Character>)= Completable.fromCallable {
-
         Realm.getDefaultInstance().use {
             realm->
                 realm.executeTransaction{
-
                     var realmList: List<CharacterRealm> = mapper.transformToRealmList(characterList)
                     if (realmList.isNullOrEmpty()) Log.v("Error","List is null or empty") else realm.insertOrUpdate(realmList)
                 }
@@ -25,16 +25,17 @@ open class ChatacterDataRepoImplementation(val mapper: CharacterMapperSave=Chara
     }
 
     private fun logAllCharacters() {
-
         val allSavedCharacterRealm = queryAllCharacters()
 
-        allSavedCharacterRealm.forEach { character ->
-            Log.v("Characters","character id ${character.id} name ${character.name} size ${allSavedCharacterRealm.size}")
+        allSavedCharacterRealm.map { character ->
+            character.forEach{
+                Log.v("Characters","character id ${it.id} name ${it.name} size ${character.size}")
+            }
+
         }
     }
 
     fun deleteQueryCharacters(queryCharacterRealm: RealmResults<CharacterRealm>) {
-
         Realm.getDefaultInstance().use {
             realm->
                 realm.executeTransaction{
@@ -46,21 +47,35 @@ open class ChatacterDataRepoImplementation(val mapper: CharacterMapperSave=Chara
         }
     }
 
-     fun queryAllCharacters(): List<Character>  {
-         val realm: Realm = Realm.getDefaultInstance()
-         val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
-                 .findAll()
-         return mapper.transformRealm(allSavedCharacterRealm)
+     fun queryAllCharacters() = Single.fromCallable  {
+         var allSavedCharacterRealm: List<CharacterRealm> = emptyList()
+
+         Realm.getDefaultInstance().use {
+              allSavedCharacterRealm = it.where(CharacterRealm::class.java).findAll().toList()
+         }
+          mapper.transformRealm(allSavedCharacterRealm)
      }
 
 
     fun queryCharacterById(id: Int?): List<Character>  {
-        val realm: Realm = Realm.getDefaultInstance()
 
-        val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
-                .equalTo(CharactersContract.COLUMN_ID, id)
-                .findAll()
+        var savedCharacterRealm: List<CharacterRealm> = emptyList()
 
-        return mapper.transformRealm(allSavedCharacterRealm)
+        Realm.getDefaultInstance().use {
+            savedCharacterRealm = it.where(CharacterRealm::class.java)
+                    .equalTo(CharactersContract.COLUMN_ID, id)
+                    .findAll()
+        }
+        return mapper.transformRealm(savedCharacterRealm)
+
+//         val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
+//                 .findAll()
+
+
+//        val realm: Realm = Realm.getDefaultInstance()
+//        val allSavedCharacterRealm = realm.where(CharacterRealm::class.java)
+//                .equalTo(CharactersContract.COLUMN_ID, id)
+//                .findAll()
+//        return mapper.transformRealm(allSavedCharacterRealm)
     }
 }
