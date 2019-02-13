@@ -17,11 +17,13 @@ import java.lang.ref.WeakReference
 class CharecterView(val activity: MainActivity) {
 
     private val SPAN_COUNT = 1
+    private val CHARACTER_LOADER_ID=101
 
     var adapter:CharacterAdapter?=null
 
-    fun init() {
+    fun init(presenter: CharacterPresenter) {
         if (activity != null) {
+            activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(activity, presenter))
              adapter = CharacterAdapter { character ->
                 val fragment=CharacterDetailFragment.newInstance(character.id)
                 fragment.show(activity.fragmentManager,"detailDialogTag")
@@ -29,12 +31,11 @@ class CharecterView(val activity: MainActivity) {
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
             showLoading()
+            activity.floatingActionButton.setOnClickListener{
+                presenter.fabListener()
+            }
         }
 
-    }
-
-    fun getFloatinButton(): FloatingActionButton {
-        return  activity.floatingActionButton
     }
 
     fun showToast(message: String) {
@@ -47,7 +48,6 @@ class CharecterView(val activity: MainActivity) {
         if (activity != null) {
             val message = activity.baseContext.resources.getString(R.string.message_no_items_to_show)
             activity.applicationContext.showToast(message)
-
         }
     }
 

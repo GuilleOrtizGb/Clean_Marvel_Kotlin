@@ -17,16 +17,14 @@ class CharacterPresenter(view: CharecterView,
                          private val getChatacterSaveUseCase: GetCharactersSaveUseCase,
                          val subscriptions: CompositeDisposable) : Presenter<CharecterView>(view), UpdateCharacters {
 
-    private val CHARACTER_LOADER_ID=101
-
     fun init() {
-        view.init()
-        view.activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(view.activity,this))
+        view.init(this)
         requestGetCharacters()
-        view.getFloatinButton().setOnClickListener{
-            view.showLoading()
-            requestGetCharacters()
-        }
+    }
+
+     fun fabListener() {
+        view.showLoading()
+        requestGetCharacters()
     }
 
     override fun updateCharacters(characters: List<Character>) {
