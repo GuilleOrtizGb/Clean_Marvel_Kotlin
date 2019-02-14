@@ -33,14 +33,6 @@ class CharactersContentProvider: ContentProvider(){
     }
 
     override fun onCreate(): Boolean {
-        Realm.init(context);
-
-        val config= RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build()
-
-        Realm.setDefaultConfiguration(config)
-
         return true
     }
 
