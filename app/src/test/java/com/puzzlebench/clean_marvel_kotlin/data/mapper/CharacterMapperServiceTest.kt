@@ -12,6 +12,7 @@ import org.junit.Test
 class CharacterMapperServiceTest {
     private lateinit var mapper: CharacterMapperService
     private val NAME = "sport"
+    private val ID = 123
     private val DESCRIPTION = "some description"
     private val PAHT = "http:/some.com/"
     private val EXTENSION = ".PNG"
@@ -26,7 +27,7 @@ class CharacterMapperServiceTest {
     fun transform() {
 
         val mockThumbnailResponse = ThumbnailResponse(PAHT, EXTENSION)
-        val mockCharacterResponse = CharacterResponse(NAME, DESCRIPTION, mockThumbnailResponse)
+        val mockCharacterResponse = CharacterResponse(ID, NAME, DESCRIPTION, mockThumbnailResponse)
         val result = mapper.transform(mockCharacterResponse)
         assertBufferooDataEquality(mockCharacterResponse, result)
     }
@@ -34,7 +35,7 @@ class CharacterMapperServiceTest {
     @Test
     fun transformToResponse() {
         val mockThumbnail = Thumbnail(PAHT, EXTENSION)
-        val mockCharacter = Character(NAME, DESCRIPTION, mockThumbnail)
+        val mockCharacter = Character(ID, NAME, DESCRIPTION, mockThumbnail)
         val result = mapper.transformToResponse(mockCharacter)
         assertBufferooDataEquality(result, mockCharacter)
 

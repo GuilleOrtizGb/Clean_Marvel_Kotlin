@@ -1,8 +1,11 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
+import com.puzzlebench.clean_marvel_kotlin.data.database.ChatacterDataRepoImplementation
 import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
+import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterDetailsServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
+import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharactersSaveUseCase
 import com.puzzlebench.clean_marvel_kotlin.mocks.factory.CharactersFactory
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
@@ -22,8 +25,11 @@ class CharacterPresenterTest {
 
     private var view = mock(CharecterView::class.java)
     private var characterServiceImp = mock(CharacterServicesImpl::class.java)
+    private var characterSaveImp = mock(ChatacterDataRepoImplementation::class.java)
     private lateinit var characterPresenter: CharacterPresenter
     private lateinit var getCharacterServiceUseCase: GetCharacterServiceUseCase
+    private lateinit var getCharacterSaveUseCase: GetCharactersSaveUseCase
+    private lateinit var getCharacterDetailsServiceUseCase: GetCharacterDetailsServiceUseCase
 
 
     @Before
@@ -32,9 +38,12 @@ class CharacterPresenterTest {
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
 
         getCharacterServiceUseCase = GetCharacterServiceUseCase(characterServiceImp)
+        getCharacterSaveUseCase = GetCharactersSaveUseCase(characterSaveImp)
+        getCharacterDetailsServiceUseCase= GetCharacterDetailsServiceUseCase(characterServiceImp)
         val subscriptions = mock(CompositeDisposable::class.java)
-        characterPresenter = CharacterPresenter(view, getCharacterServiceUseCase, subscriptions)
 
+        characterPresenter = CharacterPresenter(view, getCharacterServiceUseCase,
+                getCharacterSaveUseCase, subscriptions)
 
     }
 
@@ -42,7 +51,7 @@ class CharacterPresenterTest {
     fun reposeWithError() {
         Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(Observable.error(Exception("")))
         characterPresenter.init()
-        verify(view).init()
+        verify(view).init(characterPresenter)
         verify(characterServiceImp).getCaracters()
         verify(view).hideLoading()
         verify(view).showToastNetworkError("")
@@ -55,7 +64,7 @@ class CharacterPresenterTest {
         val observable = Observable.just(itemsCharecters)
         Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(observable)
         characterPresenter.init()
-        verify(view).init()
+        verify(view).init(characterPresenter)
         verify(characterServiceImp).getCaracters()
         verify(view).hideLoading()
         verify(view).showCharacters(itemsCharecters)
@@ -69,7 +78,7 @@ class CharacterPresenterTest {
         val observable = Observable.just(itemsCharecters)
         Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(observable)
         characterPresenter.init()
-        verify(view).init()
+        verify(view).init(characterPresenter)
         verify(characterServiceImp).getCaracters()
 
 
