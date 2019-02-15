@@ -13,6 +13,7 @@ class CharacterDetailPresenter(
 
     fun init(){
         view.init()
+        requestGetCharacterDetail()
     }
 
     fun requestGetCharacterDetail(){
@@ -21,7 +22,7 @@ class CharacterDetailPresenter(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ character ->
                     if (character.isEmpty()) {
-                        view.showToast("Character is empty")
+                        view.showToastNoItemToShow()
                     } else {
                         view.showCharacterDetals(character [0])
                     }
