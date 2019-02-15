@@ -32,7 +32,7 @@ class CharacterPresenter(view: CharecterView,
         view.showCharacters(characters)
     }
 
-    private fun requestGetCharacters() {
+    fun requestGetCharacters() {
         val subscription =
                 getChatacterServiceUseCase()
                 .subscribeOn(Schedulers.io())
