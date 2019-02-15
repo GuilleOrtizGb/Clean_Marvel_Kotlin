@@ -41,7 +41,7 @@ class CharacterDetailFragment: BaseRxDialogFragment(){
     }
 
     companion object {
-        fun newInstance(characterId: Int)=
+       open fun newInstance(characterId: Int)=
                 CharacterDetailFragment().apply {
                     arguments=Bundle().apply {
                         putInt(Constant.CHARACTER_ID, characterId)
