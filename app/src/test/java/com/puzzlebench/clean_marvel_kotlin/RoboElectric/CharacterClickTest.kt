@@ -29,8 +29,8 @@ class CharacterClickTest{
 
         val myActivityShadow = shadowOf(activityController.get())
 
-        val currentRecyclerView = myActivityShadow.findViewById(R.id.recycleView) as RecyclerView
-        currentRecyclerView.getChildAt(0).performClick()
+        //val currentRecyclerView = myActivityShadow.findViewById(R.id.recycleView) as RecyclerView
+        //currentRecyclerView.getChildAt(0).performClick()
 
     }
 
