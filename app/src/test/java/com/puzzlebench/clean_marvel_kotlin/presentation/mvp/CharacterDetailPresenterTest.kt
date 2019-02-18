@@ -17,15 +17,13 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito
-
-import org.mockito.Mockito.*
+import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class CharacterDetailPresenterTest{
 
     private var detailView: CharacterDetailView = mock(CharacterDetailView::class.java)
     private var characterServicesImpl: CharacterServicesImpl = mock(CharacterServicesImpl::class.java)
-
 
     private lateinit var characterDetailPresenter: CharacterDetailPresenter
     private lateinit var getCharacterDetailsServiceUseCase: GetCharacterDetailsServiceUseCase
@@ -33,7 +31,6 @@ class CharacterDetailPresenterTest{
     @Before
     fun setUp(){
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
-
         getCharacterDetailsServiceUseCase = GetCharacterDetailsServiceUseCase(characterServicesImpl)
         val subscrptions = mock(CompositeDisposable::class.java)
         characterDetailPresenter = CharacterDetailPresenter(detailView, getCharacterDetailsServiceUseCase, subscrptions)
@@ -76,7 +73,6 @@ class CharacterDetailPresenterTest{
         verify(detailView).init()
         verify(characterServicesImpl).getCharactersDetails(1)
         verify(detailView).showCharacterDetals(characters[0])
-
     }
 
     @Test
@@ -97,7 +93,5 @@ class CharacterDetailPresenterTest{
         verify(detailView).init()
         verify(characterServicesImpl).getCharactersDetails(1)
         verify(detailView).showToastNoItemToShow()
-
     }
-
 }

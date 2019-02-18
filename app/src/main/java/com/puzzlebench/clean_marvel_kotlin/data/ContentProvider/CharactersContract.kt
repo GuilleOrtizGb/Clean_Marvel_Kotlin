@@ -4,7 +4,6 @@ import android.net.Uri
 
  class CharactersContract{
     companion object {
-
         fun buildCharacterUriWithId(id: Int) = CONTENT_URI.buildUpon()
                 .appendPath(id.toString())
                 .build()

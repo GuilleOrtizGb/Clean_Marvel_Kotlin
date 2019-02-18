@@ -4,12 +4,11 @@ import android.os.SystemClock
 import android.util.Log
 import android.view.View
 
-class DebouncedOnClickListener constructor(private val clickListener: View.OnClickListener,
+class DebouncedOnClickListener (private val clickListener: View.OnClickListener,
                                            private val debounceInterval: Long = DEBOUNCE_INTERVAL_DEFAULT) : View.OnClickListener {
     private var lastClickTime: Long = 0
 
     companion object {
-
         private val DEBOUNCE_INTERVAL_DEFAULT: Long = 500
     }
 
@@ -21,5 +20,4 @@ class DebouncedOnClickListener constructor(private val clickListener: View.OnCli
         lastClickTime = SystemClock.elapsedRealtime()
         clickListener.onClick(v)
     }
-
 }

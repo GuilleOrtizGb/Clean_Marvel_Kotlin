@@ -42,16 +42,6 @@ open class ChatacterDataRepoImplementation(val mapper: CharacterMapperSave=Chara
          mapper.transformRealm(allSavedCharacterRealm)
     }
 
-//     fun queryAllCharacters() = Single.fromCallable   {
-//
-//         var allSavedCharacterRealm: List<CharacterRealm> = emptyList()
-//
-//         Realm.getDefaultInstance().use {
-//              allSavedCharacterRealm = it.where(CharacterRealm::class.java).findAll().toList()
-//         }
-//          mapper.transformRealm(allSavedCharacterRealm)
-//     }
-
     fun queryCharacterById(id: Int?): List<Character> {
 
         var savedCharacterRealm: List<CharacterRealm> = emptyList()

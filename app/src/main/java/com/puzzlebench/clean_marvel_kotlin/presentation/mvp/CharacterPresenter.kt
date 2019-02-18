@@ -47,7 +47,6 @@ class CharacterPresenter(view: CharecterView,
     }
 
     private fun saveCharacters(characters: List<Character>) {
-
         val subscription =
                 getChatacterSaveUseCase(characters)
                 .subscribeOn(Schedulers.io())

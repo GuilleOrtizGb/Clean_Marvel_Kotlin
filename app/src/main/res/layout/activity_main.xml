@@ -24,7 +24,7 @@
         android:layout_width="@dimen/width_fab_main_activity"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_margin="@dimen/medium_margin_main_activity"
+        android:layout_margin="@dimen/margin_main_activity_medium"
         android:clickable="true"
         android:scaleType="center"
         app:srcCompat="@android:drawable/stat_notify_sync_noanim" />

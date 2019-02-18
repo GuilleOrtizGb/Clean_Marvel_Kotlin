@@ -22,17 +22,14 @@ class CharecterView(val activity: MainActivity): UpdateCharacters {
     var adapter:CharacterAdapter?=null
 
     fun init() {
-        if (activity != null) {
-            activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(activity, this))
-             adapter = CharacterAdapter { character ->
-                val fragment=CharacterDetailFragment.newInstance(character.id)
-                fragment.show(activity.fragmentManager,"detailDialogTag")
-            }
-            activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
-            activity.recycleView.adapter = adapter
-            showLoading()
+        activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(activity, this))
+        adapter = CharacterAdapter { character ->
+            val fragment=CharacterDetailFragment.newInstance(character.id)
+            fragment.show(activity.fragmentManager,"detailDialogTag")
         }
-
+        activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
+        activity.recycleView.adapter = adapter
+        showLoading()
     }
 
     override fun updateCharacters(characters: List<Character>) {
@@ -41,16 +38,12 @@ class CharecterView(val activity: MainActivity): UpdateCharacters {
     }
 
     fun showToast(message: String) {
-        if (activity != null) {
-            activity.applicationContext.showToast(message)
-        }
+        activity.applicationContext.showToast(message)
     }
 
     fun showToastNoItemToShow() {
-        if (activity != null) {
-            val message = activity.baseContext.resources.getString(R.string.message_no_items_to_show)
-            activity.applicationContext.showToast(message)
-        }
+        val message = activity.baseContext.resources.getString(R.string.message_no_items_to_show)
+        activity.applicationContext.showToast(message)
     }
 
     fun showToastNetworkError(error: String) {
@@ -67,6 +60,5 @@ class CharecterView(val activity: MainActivity): UpdateCharacters {
 
     fun showLoading() {
         activity.progressBar.visibility = View.VISIBLE
-
     }
 }

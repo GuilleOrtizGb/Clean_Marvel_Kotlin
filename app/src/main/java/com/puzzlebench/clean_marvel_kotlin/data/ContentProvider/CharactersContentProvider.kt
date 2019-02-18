@@ -77,7 +77,7 @@ class CharactersContentProvider: ContentProvider(){
                 CharactersContract.COLUMN_THUMBNAIL_PATH,
                 CharactersContract.COLUMN_THUMBNAIL_EXTENSION)
 
-        var cursor = MatrixCursor(columnNames)
+        val cursor = MatrixCursor(columnNames)
 
         allCharacters.forEach { character ->
             var cursorRow = arrayOf(
