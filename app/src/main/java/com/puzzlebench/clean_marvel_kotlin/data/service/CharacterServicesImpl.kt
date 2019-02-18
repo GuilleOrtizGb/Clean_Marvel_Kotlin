@@ -10,19 +10,13 @@ class CharacterServicesImpl(private val api: MarvelResquestGenerator = MarvelRes
                             private val mapper: CharacterMapperService = CharacterMapperService()) {
 
     fun getCaracters(): Single<List<Character>> = Single.fromCallable{
-
-
             val callResponse = api.createService(MarvelApi::class.java).getCharacter()
             val response = callResponse.execute()
-
-
             if (response.isSuccessful) {
-                mapper.transform(response.body()!!.data!!.characters ?: emptyList())
-
+                mapper.transform(response.body()?.data?.characters ?: emptyList())
             } else {
                 emptyList()
             }
-
     }
 
     fun getCharactersDetails(characterId: Int): Single<List<Character>> = Single.fromCallable {

@@ -26,14 +26,6 @@ open class MainActivity : BaseRxActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Realm.init(this);
-
-        val config= RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build()
-
-        Realm.setDefaultConfiguration(config)
-
         presenter.init()
 
         this.floatingActionButton.setOnClickListener(DebouncedOnClickListener(View.OnClickListener {
