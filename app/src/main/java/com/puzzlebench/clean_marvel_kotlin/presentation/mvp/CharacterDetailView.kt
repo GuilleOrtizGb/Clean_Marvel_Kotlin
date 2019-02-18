@@ -2,6 +2,7 @@ package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
 import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.Utils.Constant
+import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.UpdateCharacters
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.getImageByUrl
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast

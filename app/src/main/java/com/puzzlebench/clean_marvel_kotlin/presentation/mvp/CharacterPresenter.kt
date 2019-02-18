@@ -1,7 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
 import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.CharacterLoader
-import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.UpdateCharacters
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterRealm
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
@@ -15,21 +14,16 @@ import io.realm.Realm
 class CharacterPresenter(view: CharecterView,
                          private val getChatacterServiceUseCase: GetCharacterServiceUseCase,
                          private val getChatacterSaveUseCase: GetCharactersSaveUseCase,
-                         val subscriptions: CompositeDisposable) : Presenter<CharecterView>(view), UpdateCharacters {
+                         val subscriptions: CompositeDisposable) : Presenter<CharecterView>(view) {
 
     fun init() {
-        view.init(this)
+        view.init()
         requestGetCharacters()
     }
 
      fun fabListener() {
         view.showLoading()
         requestGetCharacters()
-    }
-
-    override fun updateCharacters(characters: List<Character>) {
-        view.hideLoading()
-        view.showCharacters(characters)
     }
 
     fun requestGetCharacters() {

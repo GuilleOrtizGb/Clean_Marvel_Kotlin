@@ -15,16 +15,15 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
-class CharecterView(val activity: MainActivity) {
+class CharecterView(val activity: MainActivity): UpdateCharacters {
 
-    private val SPAN_COUNT = 1
     private val CHARACTER_LOADER_ID=101
-
+    private val SPAN_COUNT = 1
     var adapter:CharacterAdapter?=null
 
-    fun init(presenter: CharacterPresenter) {
+    fun init() {
         if (activity != null) {
-            activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(activity, presenter))
+            activity.loaderManager.initLoader(CHARACTER_LOADER_ID,null, CharacterLoader(activity, this))
              adapter = CharacterAdapter { character ->
                 val fragment=CharacterDetailFragment.newInstance(character.id)
                 fragment.show(activity.fragmentManager,"detailDialogTag")
@@ -32,11 +31,13 @@ class CharecterView(val activity: MainActivity) {
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
             showLoading()
-            activity.floatingActionButton.setOnClickListener(DebouncedOnClickListener(View.OnClickListener {
-                presenter.fabListener()
-            }))
         }
 
+    }
+
+    override fun updateCharacters(characters: List<Character>) {
+        hideLoading()
+        showCharacters(characters)
     }
 
     fun showToast(message: String) {

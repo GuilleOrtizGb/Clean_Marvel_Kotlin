@@ -9,11 +9,13 @@ import android.os.Bundle
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Thumbnail
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterDetailView
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterPresenter
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharecterView
 
-class  CharacterLoader(val context: MainActivity, val presenter: CharacterPresenter): LoaderManager.LoaderCallbacks<Cursor>{
+class  CharacterLoader(val context: MainActivity, val view: CharecterView): LoaderManager.LoaderCallbacks<Cursor>{
 
-    val showUpdatedCharacters: UpdateCharacters = presenter
+    val showUpdatedCharacters: UpdateCharacters = view
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
 
