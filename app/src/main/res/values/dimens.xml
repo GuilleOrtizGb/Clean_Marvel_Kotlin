@@ -13,4 +13,5 @@
     <dimen name="textView_character_name_dialog_fragment_description">20sp</dimen>
     <dimen name="medium_margin_main_activity">16dp</dimen>
     <dimen name="width_fab_main_activity">72dp</dimen>
+    <dimen name="backgorund_image_fragment_dialog">300dp</dimen>
 </resources>
