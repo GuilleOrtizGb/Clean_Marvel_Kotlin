@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
+import com.puzzlebench.clean_marvel_kotlin.Utils.DebouncedOnClickListener
 import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.CharacterLoader
 import com.puzzlebench.clean_marvel_kotlin.data.ContentProvider.UpdateCharacters
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
@@ -31,9 +32,9 @@ class CharecterView(val activity: MainActivity) {
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
             showLoading()
-            activity.floatingActionButton.setOnClickListener{
+            activity.floatingActionButton.setOnClickListener(DebouncedOnClickListener(View.OnClickListener {
                 presenter.fabListener()
-            }
+            }))
         }
 
     }

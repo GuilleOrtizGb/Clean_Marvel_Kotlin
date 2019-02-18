@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView_fragment_dialog"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?android:attr/colorForeground" />
+
+    <TextView
+        android:id="@+id/textView_fragment_dialog_character_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/textView_character_name_dialog_fragment_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_fragment_dialog" />
 
-        <ImageView
-            android:id="@+id/imageView_fragment_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="?android:attr/colorForeground" />
+    <TextView
+        android:id="@+id/textView_character_fragment_dialog_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/colorDescriptionBackground"
+        android:padding="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textView_character_name_dialog_fragment_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_fragment_dialog_character_name" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_fragment_dialog_character_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textView_character_name_dialog_fragment_name"/>
-
-            <TextView
-                android:id="@+id/textView_character_fragment_dialog_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin_fragment_dialog"
-                android:background="@color/colorDescriptionBackground"
-                android:padding="@dimen/small_margin_fragment_dialog"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textView_character_name_dialog_fragment_description" />
-        </LinearLayout>
-    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
