@@ -62,7 +62,6 @@ class MarvelResquestGenerator {
                 hexString.append(h)
             }
             return hexString.toString()
-
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
         }

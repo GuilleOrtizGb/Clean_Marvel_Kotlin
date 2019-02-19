@@ -21,17 +21,24 @@ import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
 
 //TODO fix on second iteration
 // error: However, there was exactly 1 interaction with this mock:
 class CharacterPresenterTest {
 
-    private var view = mock(CharecterView::class.java)
-    private var characterServiceImp = mock(CharacterServicesImpl::class.java)
-    private var characterSaveImp = mock(ChatacterDataRepoImplementation::class.java)
+    @Mock
+    private lateinit var view: CharecterView
+
+    @Mock
+    private lateinit var characterServiceImp: CharacterServicesImpl
+
+    @Mock
+    private lateinit var characterSaveImp: ChatacterDataRepoImplementation
 
     private lateinit var characterPresenter: CharacterPresenter
     private lateinit var getCharacterServiceUseCase: GetCharacterServiceUseCase
@@ -40,6 +47,7 @@ class CharacterPresenterTest {
     @Before
     fun setUp() {
 
+        MockitoAnnotations.initMocks(this)
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
 
         getCharacterServiceUseCase = GetCharacterServiceUseCase(characterServiceImp)
@@ -62,7 +70,7 @@ class CharacterPresenterTest {
 
         characterPresenter.init()
 
-        verify(view).init(characterPresenter)
+        verify(view).init()
         verify(characterServiceImp).getCaracters()
         verify(view).showCharacters(itemsCharecters)
     }
@@ -78,7 +86,7 @@ class CharacterPresenterTest {
 
         characterPresenter.init()
 
-        verify(view).init(characterPresenter)
+        verify(view).init()
         verify(characterServiceImp).getCaracters()
         verify(view).showCharacters(itemsCharecters)
     }
@@ -92,7 +100,7 @@ class CharacterPresenterTest {
 
         characterPresenter.init()
 
-        verify(view).init(characterPresenter)
+        verify(view).init()
         verify(characterServiceImp).getCaracters()
         verify(view).showToastNoItemToShow()
         assertEquals(characterServiceImp.getCaracters(), observable)
