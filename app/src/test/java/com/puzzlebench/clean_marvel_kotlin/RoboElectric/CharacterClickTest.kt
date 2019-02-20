@@ -42,24 +42,19 @@ import org.hamcrest.CoreMatchers.`is`
 class CharacterClickTest{
 
     private lateinit var activity: MainActivity
-
     @get:Rule val rule = PowerMockRule()
-     var mockRealm: Realm? = null
+    var mockRealm: Realm? = null
 
     @Before
     fun setUp(){
-
         mockStatic(RealmLog::class.java)
         mockStatic(Realm::class.java)
 
         val mockRealm = PowerMockito.mock(Realm::class.java)
-
         `when`(Realm.getDefaultInstance()).thenReturn(mockRealm)
 
         this.mockRealm = mockRealm
-
         activity=Robolectric.setupActivity(MainActivity::class.java)
-
     }
 
     @Test
@@ -70,13 +65,10 @@ class CharacterClickTest{
     @Test
     fun recyclerView_hasData (){
         var recyclerView: RecyclerView = activity.recycleView
-        // val tvHelloWorld = activity.findViewById(R.id.tvHelloWorld) as TextView
 
         recyclerView.performClick()
         assertNotNull(recyclerView.adapter.itemCount)
         assertNotNull(recyclerView.recycledViewPool)
-//        assertNotNull(recyclerView.swapAdapter(null,true))
-
     }
 
     @Test
@@ -88,10 +80,5 @@ class CharacterClickTest{
 
         val activityController = Robolectric.buildActivity<MainActivity>(MainActivity::class.java)
         activityController.create().start().visible()
-
-        val myActivityShadow = shadowOf(activityController.get())
-
-        //val currentRecyclerView = myActivityShadow.findViewById(R.id.recycleView) as RecyclerView
-        //currentRecyclerView.getChildAt(0).performClick()
     }
 }
