@@ -9,9 +9,12 @@
     <dimen name="title_text_size">20dp</dimen>
     <dimen name="body_text_size">16dp</dimen>
     <dimen name="margin_fragment_dialog_small">8dp</dimen>
+    <dimen name="margin_splash_screen_small">8dp</dimen>
     <dimen name="textView_character_name_dialog_fragment_name">30sp</dimen>
     <dimen name="textView_character_name_dialog_fragment_description">20sp</dimen>
     <dimen name="margin_main_activity_medium">16dp</dimen>
     <dimen name="width_fab_main_activity">72dp</dimen>
     <dimen name="background_image_fragment_dialog">300dp</dimen>
+    <dimen name="splash_screen_logo_height">200dp</dimen>
+    <dimen name="splash_screen_logo_width">200dp</dimen>
 </resources>
