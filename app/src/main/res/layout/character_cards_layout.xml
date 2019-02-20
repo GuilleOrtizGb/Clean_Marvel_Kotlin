@@ -16,11 +16,11 @@
 
     <TextView
         android:id="@+id/tv_item"
+        style="@style/DefaultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_margin="@dimen/default_margin"
-        android:textColor="@android:color/white" />
+        />
 
 </RelativeLayout>

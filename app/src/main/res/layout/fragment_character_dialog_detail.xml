@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
     <ImageView
         android:id="@+id/imageView_fragment_dialog"
@@ -17,28 +26,23 @@
 
     <TextView
         android:id="@+id/textView_fragment_dialog_character_name"
+        style="@style/TitleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_fragment_dialog_small"
-        android:layout_marginStart="@dimen/margin_fragment_dialog_small"
-        android:layout_marginLeft="@dimen/margin_fragment_dialog_small"
-        android:layout_marginTop="@dimen/margin_fragment_dialog_small"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/textView_character_name_dialog_fragment_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_fragment_dialog" />
 
     <TextView
         android:id="@+id/textView_character_fragment_dialog_description"
+        style="@style/DefaultText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_fragment_dialog_small"
-        android:background="@color/colorDescriptionBackground"
-        android:padding="@dimen/margin_fragment_dialog_small"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/textView_character_name_dialog_fragment_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_fragment_dialog_character_name" />
+
+
 </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>
