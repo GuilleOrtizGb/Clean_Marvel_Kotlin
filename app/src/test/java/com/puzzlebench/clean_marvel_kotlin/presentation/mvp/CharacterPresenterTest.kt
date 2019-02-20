@@ -33,13 +33,10 @@ class CharacterPresenterTest {
 
     @Mock
     private lateinit var view: CharecterView
-
     @Mock
     private lateinit var characterServiceImp: CharacterServicesImpl
-
     @Mock
     private lateinit var characterSaveImp: ChatacterDataRepoImplementation
-
     private lateinit var characterPresenter: CharacterPresenter
     private lateinit var getCharacterServiceUseCase: GetCharacterServiceUseCase
     private lateinit var getCharacterSaveUseCase: GetCharactersSaveUseCase
@@ -56,7 +53,6 @@ class CharacterPresenterTest {
 
         characterPresenter = CharacterPresenter(view, getCharacterServiceUseCase,
                 getCharacterSaveUseCase, subscriptions)
-
     }
 
     @Test
