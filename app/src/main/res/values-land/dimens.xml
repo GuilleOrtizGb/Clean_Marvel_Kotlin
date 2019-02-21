@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="super_hero_row_height">200dp</dimen>
+    <dimen name="super_hero_row_gradient_height">200dp</dimen>
+    <dimen name="super_hero_detail_header_height">300dp</dimen>
+    <dimen name="title_text_size">20dp</dimen>
+    <dimen name="body_text_size">16dp</dimen>
+    <dimen name="margin_fragment_dialog_small">8dp</dimen>
+    <dimen name="margin_splash_screen_small">8dp</dimen>
+    <dimen name="textView_character_name_dialog_fragment_name">30sp</dimen>
+    <dimen name="textView_character_name_dialog_fragment_description">20sp</dimen>
+    <dimen name="margin_main_activity_medium">16dp</dimen>
+    <dimen name="width_fab_main_activity">72dp</dimen>
+    <dimen name="background_image_fragment_dialog">300dp</dimen>
+    <dimen name="splash_screen_logo_height">200dp</dimen>
+    <dimen name="splash_screen_logo_width">200dp</dimen>
+</resources>

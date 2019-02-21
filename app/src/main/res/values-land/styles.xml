@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="DefaultText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorCharacterDefault</item>
+        <item name="android:textSize">@dimen/textView_character_name_dialog_fragment_description</item>
+        <item name="android:padding">@dimen/margin_fragment_dialog_small</item>
+        <item name="android:layout_margin">@dimen/margin_fragment_dialog_small</item>
+        <item name="android:background">@color/colorDescriptionBackground</item>
+    </style>
+    <style name="TitleText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorCharacterTitle</item>
+        <item name="android:textSize">@dimen/textView_character_name_dialog_fragment_name</item>
+        <item name="android:layout_margin">@dimen/margin_fragment_dialog_small</item>
+    </style>
+
+</resources>
