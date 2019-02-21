@@ -13,7 +13,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
         android:id="@+id/imageView_fragment_dialog"
         android:layout_width="@dimen/background_image_fragment_dialog"
@@ -41,8 +40,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_fragment_dialog_character_name" />
-
-
 </android.support.constraint.ConstraintLayout>
-
 </android.support.v4.widget.NestedScrollView>
