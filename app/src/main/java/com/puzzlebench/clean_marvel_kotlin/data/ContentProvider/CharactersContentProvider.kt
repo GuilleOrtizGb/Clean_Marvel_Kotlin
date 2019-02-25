@@ -17,7 +17,7 @@ class CharactersContentProvider: ContentProvider(){
     val CODE_CHARACTER_WITH_ID = 101
     val PAD =  "/#"
 
-    private val sUriMatcher: UriMatcher = buildUriMatcher()
+    private val uriMatcher: UriMatcher = buildUriMatcher()
 
     private fun buildUriMatcher(): UriMatcher {
         val matcher: UriMatcher =  UriMatcher(UriMatcher.NO_MATCH)
@@ -43,23 +43,18 @@ class CharactersContentProvider: ContentProvider(){
     override fun query(uri: Uri?, projection: Array<out String>?,
                        selection: String?, selectionArgs: Array<out String>?,
                        sortOrder: String?): Cursor {
-
         var cursor: Cursor
 
-        when(sUriMatcher.match(uri)){
-
+        when(uriMatcher.match(uri)){
             CODE_CHARACTER -> {
-                var allCharacters: List<Character> = ChatacterDataRepoImplementation()
+                val allCharacters: List<Character> = ChatacterDataRepoImplementation()
                         .queryAllCharacters().blockingGet()
                 cursor = createCursor(allCharacters)
             }
-
             CODE_CHARACTER_WITH_ID -> {
-                var id: String? = uri?.lastPathSegment
-
-                var characterById: List<Character> = ChatacterDataRepoImplementation()
+                val id: String? = uri?.lastPathSegment
+                val characterById: List<Character> = ChatacterDataRepoImplementation()
                         .queryCharacterById(id?.toInt())
-
                 cursor = createCursor(characterById)
             }
             else -> {
@@ -70,7 +65,6 @@ class CharactersContentProvider: ContentProvider(){
     }
 
     private fun createCursor(allCharacters: List<Character>): MatrixCursor {
-
         var columnNames: Array<String> = arrayOf(CharactersContract.COLUMN_ID,
                 CharactersContract.COLUMN_NAME,
                 CharactersContract.COLUMN_DESCRIPTION,

@@ -18,7 +18,6 @@ class  CharacterLoader(val context: MainActivity, val view: CharecterView): Load
     val showUpdatedCharacters: UpdateCharacters = view
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-
         val uri: String = CharactersContract.CONTENT_URI.toString()
         return CursorLoader(context, Uri.parse(uri),null,null,
                 null,null)
@@ -34,7 +33,6 @@ class  CharacterLoader(val context: MainActivity, val view: CharecterView): Load
 }
 
 private fun  Cursor.toList(cursor: Cursor): MutableList<Character> {
-
     return generateSequence { if (cursor.moveToNext()) cursor else null }
                  .map { Character(
                          it.getInt(it.getColumnIndex(CharactersContract.COLUMN_ID)),
