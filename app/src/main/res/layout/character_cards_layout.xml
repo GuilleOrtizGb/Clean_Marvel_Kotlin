@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/super_hero_row_height">
 
@@ -10,7 +10,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/super_hero_row_gradient_height"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:background="@drawable/super_hero_gradient" />
 
@@ -19,8 +19,7 @@
         style="@style/DefaultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        />
+        android:layout_alignParentBottom="true" />
 
-</RelativeLayout>
+</FrameLayout>
