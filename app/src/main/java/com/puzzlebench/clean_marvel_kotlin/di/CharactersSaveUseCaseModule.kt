@@ -8,8 +8,8 @@ import dagger.Provides
 
 @Module
 class CharactersSaveUseCaseModule{
-//    @Provides
-//    fun providesCharactersSaveUseCase(characterDataRepo: CharacterDataRepo): GetCharactersSaveUseCase {
-//        return GetCharactersSaveUseCase(characterDataRepo)
-//    }
+    @Provides
+    fun providesCharactersSaveUseCase(): GetCharactersSaveUseCase {
+        return GetCharactersSaveUseCase(ChatacterDataRepoImplementation())
+    }
 }
